@@ -24,6 +24,17 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+#Configuring sources:
+version: 2
+
+sources:
+  - name: Exercise
+    database: SNOWFLAKE_SAMPLE_DATA   
+    schema: TPCH_SF1  
+    tables:
+      - name: CUSTOMERS
+      - name: ORDER
+
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -32,8 +43,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  jaffle_shop:
-    staging:
+  view-table:
+    stage1:
       +materialized: view
-    marts:
+    mart1:
       +materialized: table
